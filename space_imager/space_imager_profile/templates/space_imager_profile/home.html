@@ -1,0 +1,17 @@
+{% extends 'space_imager_profile/base.html' %}
+
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+    <h1>...SPACE!!!!</h1>
+{% load static %}
+<div class="container">
+<img src="{% static "space_imager_profile/eagle_nebula" %}" class="img-rounded" alt="what no rounded corners?" width="304" height="236"/>
+<div>
+
+{% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+
+{% endblock %}

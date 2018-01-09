@@ -17,6 +17,7 @@ from django.urls import include, path
 from django.contrib import admin
 
 urlpatterns = [
-    path('space_imager_profile/', include('space_imager_profile.urls')),
+   # path('space_imager_profile/', include('space_imager_profile.urls')),
+    path('', include('space_imager_profile.urls')),
     path('admin/', admin.site.urls),
 ]
