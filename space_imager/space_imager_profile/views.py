@@ -14,3 +14,9 @@ def home_view(request):
 def index(request):
     return HttpResponse("Hello, world. This is the Space Imager")
     '''
+
+def home(request):
+    return HttpResponse("The home might display here")
+
+def about(request):
+     return HttpResponse("Some other stuff might display here")

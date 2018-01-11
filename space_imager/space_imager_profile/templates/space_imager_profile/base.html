@@ -6,37 +6,25 @@
 <link rel="stylesheet" href="{% static "imager_profile/styles.css" %}">
 {% block bootstrap3_content %}
     <div class="container">
-        <h1>Space-Imager</h1>
+        <div class="page-header">
+            <h1>Space Imager <small>The place for space photos</small></h1>
+        </div>
         <ul class="nav nav-pills">
-           
-            <!--
-            {% if request.user.is_active == False %}
-            <li role="presentation"><a href="{% url 'login' %}">Login</a></li>
-            <li role="presentation"><a href="{% url 'register' %}">Register</a></li>
-            {% endif %}-->
-            
-            <!--
-            {% if request.user.is_active %}
-              <div id="nav-username" class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    {{ user.username }}
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="{% url 'profile' %}">Profile</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="{% url 'add-album' %}">Create Album</a></li>
-                    <li><a href="{% url 'add-photo' %}">Upload Photo</a></li>
-                    <li><a href="{% url 'public-albums' %}">Public Albums</a></li>
-                    <li><a href="{% url 'public-photos' %}">Public Photos</a></li>
-                    <li><a href="{% url 'library' %}">Library</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="{% url 'logout' %}"> Logout</a></li>
-                </ul>
-              </div>
-            {% endif %}-->
-        </ul>
+            <li role="presentation"><a href="{% url 'home' %}">{% bootstrap_icon "home" %} Home</a></li>
+            <li role="presentation"><a href="{% url 'about' %}">About</a></li>
+            <li role="presentation"><a href="">Other Things</a></li>
 
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#"></a></li>
+                <li><a href="#">Go To Login Screen Here</a></li>
+                <li><a href="#">Go to New User Registration here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Go Somewhere else</a></li>
+              </ul>
+            </li>
+        </ul>
         {% block content %}{% endblock %}
 
     </div>
