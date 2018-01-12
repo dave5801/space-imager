@@ -2,7 +2,6 @@ from django.http import HttpResponse
 #from django.shortcuts import render
 from django.template import loader
 
-
 def home_view(request):
     """Home view callable, for the home page."""
     template = loader.get_template("space_imager_profile/home.html")
