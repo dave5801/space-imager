@@ -19,7 +19,8 @@ def call_nasa_url_return_photo_url():
 
 def retrieve_from_photo_url_and_save_in_dir(photo_url):
     """."""
-    download_space_photo_file_path = "static/space_photos/space_photo1" + str(datetime.now()) +".jpg"
+    #download_space_photo_file_path = "static/space_photos/" + str(datetime.now()) +".jpg"
+    download_space_photo_file_path = "space_imager_profile/static/space_photos/" + str(datetime.now()) +".jpg"
     urllib.request.urlretrieve(photo_url, download_space_photo_file_path) #save in dir
 
 
