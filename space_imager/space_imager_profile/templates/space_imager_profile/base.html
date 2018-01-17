@@ -4,8 +4,13 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static "imager_profile/styles.css" %}">
+<style>
+.space {
+  background-color: black;
+}
+</style>
 {% block bootstrap3_content %}
-    <div class="container">
+    <div class="container space">
         <div class="page-header">
             <h1>Space Imager <small>The place for space photos</small></h1>
         </div>
@@ -25,9 +30,15 @@
               </ul>
             </li>
         </ul>
-        {% block content %}{% endblock %}
 
-    </div>
+        {% block content %}{% endblock %}
+        
+        
+
+    <footer class="space">
+            <h2 class="section-heading text-center">Social Media Goes Here</h2>
+            <p class="text-faded text-center">Probably change the color</p>
+    </footer>
 
 {% endblock %}
 
