@@ -12,14 +12,12 @@ def home_view(request):
     response_body = template.render()
     return HttpResponse(response_body)
 
-# Create your views here.
-'''
-def index(request):
-    return HttpResponse("Hello, world. This is the Space Imager")
-    '''
 
 def home(request):
+    """."""
     return HttpResponse("The home might display here")
 
+
 def about(request):
+     """."""
      return HttpResponse("Some other stuff might display here")

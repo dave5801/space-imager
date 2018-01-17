@@ -6,10 +6,11 @@
 {% bootstrap_javascript %}
 
 {% block content %}
-    <h1>...SPACE!!!!</h1>
 {% load static %}
+
+
 <div class="container">
-<img src="{% static "space_imager_profile/eagle_nebula" %}" class="img-rounded" alt="space photo here" width="304" height="236"/>
+    <img src="{% static "space_photos/eagle_nebula.jpg" %}" class="img-rounded" alt="space photo here" width="304" height="236"/>
 <div>
 
 {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
