@@ -1,7 +1,12 @@
+"""."""
+
 from django.db import models
+from django.dispatch import receiver
+from space_imager_profile.space_photo_from_api import NASA_SpacePhoto_From_API_Object
+from django.contrib.auth.models import User
 
 
-class Space_Image(models.Model):
+class Space_Photo_From_API_Model(models.Model, NASA_SpacePhoto_From_API_Object):
     """Model for a Space Photo."""
     copyright = models.TextField(max_length=2000)
     date = models.DateTimeField(auto_now=True)
@@ -11,6 +16,17 @@ class Space_Image(models.Model):
     service_version = models.CharField(max_length=2)
     title = models.TextField(max_length=50)
     url = models.CharField(max_length=180)
+
+    def __str__(self):
+        """Print function returns title of photo."""
+        return self.title
+
+@receiver(models.signals.post_save, sender=User)
+def create_space_photo_from_api_object(sender, **kwargs):
+    """Create the profile when a user is created."""
+    if kwargs['created']:
+        space_photo_from_api_object = Space_Photo_From_API_Model(user=kwargs['instance'])
+        space_photo_from_api_object.save()
 
 
 

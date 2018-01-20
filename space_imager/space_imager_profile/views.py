@@ -1,10 +1,5 @@
 from django.http import HttpResponse
 from django.template import loader
-from space_imager_profile.nasa_api_call import call_nasa_url_return_photo_url, retrieve_from_photo_url_and_save_in_dir
-
-SPACE_PHOTO_URL = call_nasa_url_return_photo_url()
-retrieve_from_photo_url_and_save_in_dir(SPACE_PHOTO_URL)
-
 
 def home_view(request):
     """Home view callable, for the home page."""
