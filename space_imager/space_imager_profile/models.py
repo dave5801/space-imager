@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from space_imager_profile.space_photo_from_api import NASA_SpacePhoto_From_API_Object
 from django.contrib.auth.models import User
 
+
 class Space_Photo_From_API_Model(models.Model, NASA_SpacePhoto_From_API_Object):
     """Model for a Space Photo."""
     copyright = models.TextField(max_length=2000)
