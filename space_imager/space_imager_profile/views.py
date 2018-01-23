@@ -7,6 +7,7 @@ from space_imager_profile.models import SpacePhoto, SpacePhotoManager
 def home_view(request):
     """Home view callable, for the home page."""
     space_photo = SpacePhoto.objects.create_space_photo()
+    print(space_photo.explanation)
 
     template = loader.get_template("space_imager_profile/home.html")
     response_body = template.render()
