@@ -35,8 +35,18 @@ def create_space_photo_from_api_object(sender, **kwargs):
 
 class SpacePhotoManager(models.Manager):
     def create_space_photo(self, title):
-        space_photo = self.create(title=title)
-        # do something with the book
+        
+        nasa_apod_url = 'https://api.nasa.gov/planetary/apod?api_key='
+        nasa_api_key = 'sgQen3xfYyYvOzwtIn1QKeCe5SmHiFxLjdIVv6lz'
+
+        make_request_from_nasa_api = requests.get(nasa_apod_url + nasa_api_key)
+        nasa_request_converted_to_json = make_request_from_nasa_api.json()
+        #print(nasa_request_converted_to_json)
+
+
+
+        space_photo = self.create(title=nasa_request_converted_to_json['title'])
+
         return space_photo
 
 
