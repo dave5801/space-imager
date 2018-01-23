@@ -1,12 +1,14 @@
-"""."""
+"""Model for a Space Photo taken from NASA."""
 
 from django.db import models
 from django.dispatch import receiver
-from space_imager_profile.space_photo_from_api import NASA_SpacePhoto_From_API_Object
+from space_imager_profile.space_photo_from_api import NASA_Space_Photo_DTO
 from django.contrib.auth.models import User
 
+import requests
 
-class Space_Photo_From_API_Model(models.Model, NASA_SpacePhoto_From_API_Object):
+'''
+class Space_Photo_From_API_Model(models.Model):
     """Model for a Space Photo."""
     copyright = models.TextField(max_length=2000)
     date = models.DateTimeField(auto_now=True)
@@ -26,38 +28,54 @@ def create_space_photo_from_api_object(sender, **kwargs):
     """Create the profile when a user is created."""
     if kwargs['created']:
         space_photo_from_api_object = Space_Photo_From_API_Model(user=kwargs['instance'])
+        import pdb; pdb.set_trace()
         space_photo_from_api_object.save()
+'''
 
 
+class BookManager(models.Manager):
+    def create_book(self, title):
+        book = self.create(title=title)
+        # do something with the book
+        return book
 
-'''EXAMPLE
-from django.db import models
-from django.dispatch import receiver
-from emotion_profile.models import User
-from emotion_authentication.face_verification import FaceVerification
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+
+    objects = BookManager()
+
+#book = Book.objects.create_book("Pride and Prejudice")
+
+     
+
+    '''
+    def make_nasa_api_request_and_return_json(self, nasa_apod_url, nasa_api_key):
+        make_request_from_nasa_api = requests.get(nasa_apod_url + nasa_api_key)
+        nasa_request_converted_to_json = make_request_from_nasa_api.json()
+
+        return nasa_request_converted_to_json
+
+    def get_new_space_photo(self):
+
+        #will become part of environ
+        nasa_apod_url = 'https://api.nasa.gov/planetary/apod?api_key='
+        nasa_api_key = 'sgQen3xfYyYvOzwtIn1QKeCe5SmHiFxLjdIVv6lz'
+
+        nasa_space_photo_json = self.make_nasa_api_request_and_return_json(nasa_apod_url, nasa_api_key)
+
+        return NASA_SpacePhoto_Template_Object(nasa_space_photo_json)
+        '''
 
 
-# Create your models here.
-class FaceVerificationManager(models.Model, FaceVerification):
-    objects = models.Manager
-    user = models.OneToOneField(User, on_delete=models.CASCADE,
-                                related_name='faces')
-    auth_face = models.ImageField(upload_to='auth_faces',
-                                  blank=True,
-                                  null=True)
-    auth_face_id = models.CharField(blank=True,null=True,max_length=36)
+'''
+class BookManager(models.Manager):
+    def create_book(self, title):
+        book = self.create(title=title)
+        # do something with the book
+        return book
 
-    auth_last_recorded = models.DateTimeField(blank=True,null=True)
+class Book(models.Model):
+    title = models.CharField(max_length=100)
 
-    def __str__(self):
-        """Print function returns this."""
-        return self.user.username
-
-
-@receiver(models.signals.post_save, sender=User)
-def create_face_verification_object(sender, **kwargs):
-    """Create the profile when a user is created."""
-    if kwargs['created']:
-        face_verification_object = FaceVerificationManager(user=kwargs['instance'])
-        face_verification_object.save()
+    objects = BookManager()
 '''

@@ -121,5 +121,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-NASA_URL = 'https://api.nasa.gov/planetary/apod?api_key='
-NASA_API_KEY = 'sgQen3xfYyYvOzwtIn1QKeCe5SmHiFxLjdIVv6lz'
+NASA_URL = ''
+NASA_API_KEY = ''

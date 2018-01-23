@@ -5,16 +5,15 @@ import requests
 
 class NASA_SpacePhoto_Template_Object(object):
     """Call API convert to JSON and be ready to send to Models."""
-
+    """Note: JSON doesn't always have all desired properites, hence if statements."""
     def __init__(self, nasa_request_converted_to_json=None):
-
         if 'copyright' in nasa_request_converted_to_json:
             self.copyright = nasa_request_converted_to_json['copyright']
         else:
             self.copyright = ''
 
         if 'date' in nasa_request_converted_to_json:
-             self.date = nasa_request_converted_to_json['date']
+            self.date = nasa_request_converted_to_json['date']
         else:
             self.date = ''
 
@@ -32,17 +31,16 @@ class NASA_SpacePhoto_Template_Object(object):
             self.media_type = nasa_request_converted_to_json['media_type']
         else:
             self.media_type = ''
-         
+
         if 'service_version' in nasa_request_converted_to_json:
             self.service_version = nasa_request_converted_to_json['service_version']
-        else: 
+        else:
             self.service_version = ''
 
         if 'title' in nasa_request_converted_to_json:
             self.title = nasa_request_converted_to_json['title']
         else:
             self.title = ''
-
 
         if 'url' in nasa_request_converted_to_json:
             self.url = nasa_request_converted_to_json['url']
