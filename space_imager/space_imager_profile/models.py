@@ -35,7 +35,7 @@ def create_space_photo_from_api_object(sender, **kwargs):
 
 class SpacePhotoManager(models.Manager):
     def create_space_photo(self):
-        
+        #https://api.nasa.gov/planetary/apod?api_key=sgQen3xfYyYvOzwtIn1QKeCe5SmHiFxLjdIVv6lz
         nasa_apod_url = 'https://api.nasa.gov/planetary/apod?api_key='
         nasa_api_key = 'sgQen3xfYyYvOzwtIn1QKeCe5SmHiFxLjdIVv6lz'
 
@@ -46,6 +46,12 @@ class SpacePhotoManager(models.Manager):
 
 
         space_photo = self.create(
+            #copyright=nasa_request_converted_to_json['copyright'],
+            date=nasa_request_converted_to_json['date'],
+            explanation=nasa_request_converted_to_json['explanation'],
+            hdurl=nasa_request_converted_to_json['hdurl'],
+            media_type=nasa_request_converted_to_json['media_type'],
+            service_version=nasa_request_converted_to_json['service_version'],
             title=nasa_request_converted_to_json['title'],
             url=nasa_request_converted_to_json['url'] 
             )
@@ -53,15 +59,15 @@ class SpacePhotoManager(models.Manager):
         return space_photo
 
 
-class SpacePhoto(models.Model):
-    #copyright = models.TextField(max_length=2000)
-    #date = models.DateTimeField(auto_now=True)
-    #explanation = models.TextField(max_length=2000)
-    #hdurl = models.CharField(max_length=180)
-    #media_type = models.TextField(max_length=50)
-    #service_version = models.CharField(max_length=2)
+class SpacePhoto(models.Model): 
+    #copyright = models.TextField(max_length=2000, null=True)
+    date = models.DateTimeField(auto_now=True)
+    explanation = models.TextField(max_length=2000, null=True)
+    hdurl = models.CharField(max_length=180, null=True)
+    media_type = models.TextField(max_length=50, null=True)
+    service_version = models.CharField(max_length=2, null=True)
     title = models.TextField(max_length=50)
-    url = models.CharField(max_length=180)
+    url = models.CharField(max_length=180, null=True)
 
     objects = SpacePhotoManager()
 
