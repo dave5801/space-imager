@@ -5,16 +5,47 @@ import requests
 
 class NASA_SpacePhoto_Template_Object(object):
     """Call API convert to JSON and be ready to send to Models."""
-
+    """Note: JSON doesn't always have all desired properites, hence if statements."""
     def __init__(self, nasa_request_converted_to_json=None):
-        self.copyright = nasa_request_converted_to_json['copyright']
-        self.date = nasa_request_converted_to_json['date']
-        self.explanation = nasa_request_converted_to_json['explanation']
-        self.hdurl = nasa_request_converted_to_json['hdurl']
-        self.media_type = nasa_request_converted_to_json['media_type']
-        self.service_version = nasa_request_converted_to_json['service_version']
-        self.title = nasa_request_converted_to_json['title']
-        self.url = nasa_request_converted_to_json['url']
+        if 'copyright' in nasa_request_converted_to_json:
+            self.copyright = nasa_request_converted_to_json['copyright']
+        else:
+            self.copyright = ''
+
+        if 'date' in nasa_request_converted_to_json:
+            self.date = nasa_request_converted_to_json['date']
+        else:
+            self.date = ''
+
+        if 'explanation' in nasa_request_converted_to_json:
+            self.explanation = nasa_request_converted_to_json['explanation']
+        else:
+            self.date = ''
+
+        if 'hdurl' in nasa_request_converted_to_json:
+            self.hdurl = nasa_request_converted_to_json['hdurl']
+        else:
+            self.date = ''
+
+        if 'media_type' in nasa_request_converted_to_json:
+            self.media_type = nasa_request_converted_to_json['media_type']
+        else:
+            self.media_type = ''
+
+        if 'service_version' in nasa_request_converted_to_json:
+            self.service_version = nasa_request_converted_to_json['service_version']
+        else:
+            self.service_version = ''
+
+        if 'title' in nasa_request_converted_to_json:
+            self.title = nasa_request_converted_to_json['title']
+        else:
+            self.title = ''
+
+        if 'url' in nasa_request_converted_to_json:
+            self.url = nasa_request_converted_to_json['url']
+        else:
+            self.url = ''
 
 
 class NASA_Space_Photo_DTO(object):

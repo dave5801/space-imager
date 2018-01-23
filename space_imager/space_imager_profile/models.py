@@ -1,12 +1,14 @@
-"""."""
+"""Model for a Space Photo taken from NASA."""
 
 from django.db import models
 from django.dispatch import receiver
-from space_imager_profile.space_photo_from_api import NASA_SpacePhoto_From_API_Object
+from space_imager_profile.space_photo_from_api import NASA_Space_Photo_DTO
 from django.contrib.auth.models import User
 
+import requests
 
-class Space_Photo_From_API_Model(models.Model, NASA_SpacePhoto_From_API_Object):
+'''
+class Space_Photo_From_API_Model(models.Model):
     """Model for a Space Photo."""
     copyright = models.TextField(max_length=2000)
     date = models.DateTimeField(auto_now=True)
@@ -26,38 +28,40 @@ def create_space_photo_from_api_object(sender, **kwargs):
     """Create the profile when a user is created."""
     if kwargs['created']:
         space_photo_from_api_object = Space_Photo_From_API_Model(user=kwargs['instance'])
+        import pdb; pdb.set_trace()
         space_photo_from_api_object.save()
-
-
-
-'''EXAMPLE
-from django.db import models
-from django.dispatch import receiver
-from emotion_profile.models import User
-from emotion_authentication.face_verification import FaceVerification
-
-
-# Create your models here.
-class FaceVerificationManager(models.Model, FaceVerification):
-    objects = models.Manager
-    user = models.OneToOneField(User, on_delete=models.CASCADE,
-                                related_name='faces')
-    auth_face = models.ImageField(upload_to='auth_faces',
-                                  blank=True,
-                                  null=True)
-    auth_face_id = models.CharField(blank=True,null=True,max_length=36)
-
-    auth_last_recorded = models.DateTimeField(blank=True,null=True)
-
-    def __str__(self):
-        """Print function returns this."""
-        return self.user.username
-
-
-@receiver(models.signals.post_save, sender=User)
-def create_face_verification_object(sender, **kwargs):
-    """Create the profile when a user is created."""
-    if kwargs['created']:
-        face_verification_object = FaceVerificationManager(user=kwargs['instance'])
-        face_verification_object.save()
 '''
+
+
+class SpacePhotoManager(models.Manager):
+    def create_space_photo(self):
+        
+        nasa_apod_url = 'https://api.nasa.gov/planetary/apod?api_key='
+        nasa_api_key = 'sgQen3xfYyYvOzwtIn1QKeCe5SmHiFxLjdIVv6lz'
+
+        make_request_from_nasa_api = requests.get(nasa_apod_url + nasa_api_key)
+        nasa_request_converted_to_json = make_request_from_nasa_api.json()
+        print(nasa_request_converted_to_json)
+
+
+
+        space_photo = self.create(
+            title=nasa_request_converted_to_json['title'],
+            url=nasa_request_converted_to_json['url'] 
+            )
+
+        return space_photo
+
+
+class SpacePhoto(models.Model):
+    #copyright = models.TextField(max_length=2000)
+    #date = models.DateTimeField(auto_now=True)
+    #explanation = models.TextField(max_length=2000)
+    #hdurl = models.CharField(max_length=180)
+    #media_type = models.TextField(max_length=50)
+    #service_version = models.CharField(max_length=2)
+    title = models.TextField(max_length=50)
+    url = models.CharField(max_length=180)
+
+    objects = SpacePhotoManager()
+
