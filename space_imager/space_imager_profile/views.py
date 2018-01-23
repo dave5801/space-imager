@@ -1,15 +1,15 @@
 from django.http import HttpResponse
 from django.template import loader
 #from emotion_authentication.models import FaceVerificationManager
-from space_imager_profile.models import Book, BookManager
+from space_imager_profile.models import SpacePhoto, SpacePhotoManager
 
 
 def home_view(request):
     """Home view callable, for the home page."""
 
-    print("creating book")
-    book = Book.objects.create_book("Pride and Prejudice")
-    print(book.title)
+    print("creating space photo")
+    space_photo = SpacePhoto.objects.create_space_photo("Rigel 7")
+    print(space_photo.title)
 
     template = loader.get_template("space_imager_profile/home.html")
     response_body = template.render()

@@ -33,49 +33,15 @@ def create_space_photo_from_api_object(sender, **kwargs):
 '''
 
 
-class BookManager(models.Manager):
-    def create_book(self, title):
-        book = self.create(title=title)
+class SpacePhotoManager(models.Manager):
+    def create_space_photo(self, title):
+        space_photo = self.create(title=title)
         # do something with the book
-        return book
+        return space_photo
 
-class Book(models.Model):
+
+class SpacePhoto(models.Model):
     title = models.CharField(max_length=100)
 
-    objects = BookManager()
+    objects = SpacePhotoManager()
 
-#book = Book.objects.create_book("Pride and Prejudice")
-
-     
-
-    '''
-    def make_nasa_api_request_and_return_json(self, nasa_apod_url, nasa_api_key):
-        make_request_from_nasa_api = requests.get(nasa_apod_url + nasa_api_key)
-        nasa_request_converted_to_json = make_request_from_nasa_api.json()
-
-        return nasa_request_converted_to_json
-
-    def get_new_space_photo(self):
-
-        #will become part of environ
-        nasa_apod_url = 'https://api.nasa.gov/planetary/apod?api_key='
-        nasa_api_key = 'sgQen3xfYyYvOzwtIn1QKeCe5SmHiFxLjdIVv6lz'
-
-        nasa_space_photo_json = self.make_nasa_api_request_and_return_json(nasa_apod_url, nasa_api_key)
-
-        return NASA_SpacePhoto_Template_Object(nasa_space_photo_json)
-        '''
-
-
-'''
-class BookManager(models.Manager):
-    def create_book(self, title):
-        book = self.create(title=title)
-        # do something with the book
-        return book
-
-class Book(models.Model):
-    title = models.CharField(max_length=100)
-
-    objects = BookManager()
-'''
