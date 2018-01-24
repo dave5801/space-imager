@@ -1,18 +1,16 @@
 """Model for a Space Photo taken from NASA."""
 
 from django.db import models
-
+import os
 import requests
 
 class SpacePhotoManager(models.Manager):
     def create_space_photo(self):
-        #https://api.nasa.gov/planetary/apod?api_key=sgQen3xfYyYvOzwtIn1QKeCe5SmHiFxLjdIVv6lz
-        nasa_apod_url = 'https://api.nasa.gov/planetary/apod?api_key='
-        nasa_api_key = 'sgQen3xfYyYvOzwtIn1QKeCe5SmHiFxLjdIVv6lz'
+        nasa_apod_url = os.environ.get('NASA_APOD_URL', '')
+        nasa_api_key = os.environ.get('NASA_API_KEY', '')
 
         make_request_from_nasa_api = requests.get(nasa_apod_url + nasa_api_key)
         nasa_request_converted_to_json = make_request_from_nasa_api.json()
-        print(nasa_request_converted_to_json)
 
         '''Note - copyright field not in every NASA photo - revisit to later'''
         space_photo = self.create(
@@ -27,7 +25,7 @@ class SpacePhotoManager(models.Manager):
             )
 
         return space_photo
-
+ 
 class SpacePhoto(models.Model): 
     #copyright = models.TextField(max_length=2000, null=True)
     date = models.DateTimeField(auto_now=True)
