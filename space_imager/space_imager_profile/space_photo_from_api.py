@@ -1,7 +1,7 @@
 """Make API call to NASA Astronomy Picture of the Day."""
 
 import requests
-
+import os
 
 class NASA_SpacePhoto_Template_Object(object):
     """Call API convert to JSON and be ready to send to Models."""
@@ -60,9 +60,8 @@ class NASA_Space_Photo_DTO(object):
 
     def get_new_space_photo(self):
 
-        #will become part of environ
-        nasa_apod_url = 'https://api.nasa.gov/planetary/apod?api_key='
-        nasa_api_key = 'sgQen3xfYyYvOzwtIn1QKeCe5SmHiFxLjdIVv6lz'
+        nasa_apod_url = os.environ.get('NASA_APOD_URL', '')
+        nasa_api_key = os.environ.get('NASA_API_KEY', '')
 
         nasa_space_photo_json = self.make_nasa_api_request_and_return_json(nasa_apod_url, nasa_api_key)
 
