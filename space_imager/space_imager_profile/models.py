@@ -4,6 +4,9 @@ from django.db import models
 import os
 import requests
 
+#look into init method for a model
+#that's where the api request should go
+
 class Create_A_New_Space_Photo_from_NASA_API(models.Manager):
     def create_space_photo_from_nasa_api(self):
         nasa_apod_url_from_environment_variables = os.environ.get('NASA_APOD_URL', '')
